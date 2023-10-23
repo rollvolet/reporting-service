@@ -1,4 +1,4 @@
-import { query } from 'mu'
+import { query, sparqlEscapeInt } from 'mu'
 
 class MonthlySalesEntry
   constructor: (@month, @year, @amount) ->
@@ -72,7 +72,7 @@ WHERE {
     p2poInvoice:hasTotalLineNetAmount ?netAmount ;
     p2poInvoice:invoiceNumber ?number .
   BIND(YEAR(?date) as ?year)
-  FILTER (?year >= 2019 && ?year <= 2023)
+  FILTER (?year >= #{sparqlEscapeInt(fromYear)} && ?year <= #{sparqlEscapeInt(untilYear)})
   OPTIONAL { ?invoice dct:type ?type . }
   BIND(IF(?type = p2poInvoice:E-CreditNote, ?netAmount * - 1, ?netAmount) as ?arithmeticAmount)
   BIND(MONTH(?date) as ?month)
