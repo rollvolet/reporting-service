@@ -1,6 +1,6 @@
 {
   "name": "reporting-service",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Microservice to generate reports on the CRM data",
   "main": "app.js",
   "scripts": {
